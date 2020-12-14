@@ -10,16 +10,41 @@ router.get('/', (req, res) => {
       attributes: ['product_name', 'price', 'stock', 'category_id']
     }
   })
-    .then(tagData => res.json(tagData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-  // find all tags
-  // be sure to include its associated Product data
+  .then(tagData => {
+    if (!tagData) {
+      res.status(404).json({message: 'No product found with this ID'});
+      return;
+    }
+    res.json(tagData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
+  // find all tags
+  // be sure to include its associated Product data
+
+
 router.get('/:id', (req, res) => {
+  Tag.findOne({
+    include: {
+      model: Product,
+      attributes: ['product_name', 'price', 'stock', 'category_id']
+    }
+  })
+  .then(tagData => {
+    if (!tagData) {
+      res.status(404).json({message: 'No product found with this ID'});
+      return;
+    }
+    res.json(tagData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
   // find a single tag by its `id`
   // be sure to include its associated Product data
 });
