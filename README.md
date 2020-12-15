@@ -1,5 +1,4 @@
-# mySQLEmployeeTrackerCMS
-    Employee Profile Generator 
+## ECommerce Backend Using ORM
    
     This program is an eCommerce backend where you can get, add, edit, or delete products, and filter by category or tag.
     
